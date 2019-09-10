@@ -11,22 +11,22 @@
 - 任何时候都不要传递null参数
 
 ### 第8章 边界
-- 在使用第三方api时， 应该将它封装起来，例如在引入fastjson解析的包，可以使用自己定义JsonUtil，
-   这样如将fastjson替换为jackson时，只需要替换Jsonutil即可
-```
-// 错误示例：
-Map map = new HashMap();
-Sensor sensor = map.get("sensorId");
-
-// 正确示例：
-public class Sensors {
-    private Map map;
-    
-    public Sensor getSensor(String str) {
-        return map.get("sensorId");
-    }
-}
-```
+- 在使用第三方api时，应该将它封装起来，例如在引入fastjson解析的包，可以使用自己定义JsonUtil，
+  这样如将fastjson替换为jackson时，只需要替换Jsonutil即可
+  ```
+  // 错误示例：
+  Map map = new HashMap();
+  Sensor sensor = map.get("sensorId");
+  
+  // 正确示例：
+  public class Sensors {
+      private Map map;
+      
+      public Sensor getSensor(String str) {
+          return map.get("sensorId");
+      }
+  }
+  ```
 - 在调用第三方代码时，第三方的定义还未定义出来时，可将api信息自己封装成一个接口，待第三方api完成后，在定义
    适配器适配，可使用设计模式(适配器模式)
 - 当使用第三方api时，可学习性测试，即另起一个小项目，进行对api的了解和测试
@@ -45,40 +45,40 @@ public class Sensors {
 - 系统应该由许多短小的类组成，而不是由少量的巨大的类组成，每个小类封装一个权责，只有一个修改的理由，
    并与少量其他类一起协同达成期望的系统行为，类的只有一个修改理由是指，类应该只有一个功能，并修改这个
    功能，示例如下：
-```
-/**
- * 升级组件必然升级版本号，升级版本号，未必是升级组件，可能是修改别的内容，这是做了两件事情 
- */
-public class MultipleFuctionClass {
-
-    // 功能1，升级组件
-    public void updateComponent(){...}
+    ```
+    /**
+     * 升级组件必然升级版本号，升级版本号，未必是升级组件，可能是修改别的内容，这是做了两件事情 
+     */
+    public class MultipleFuctionClass {
     
-    // 功能2，升级版本号
-    public void updateVersion(){...}
+        // 功能1，升级组件
+        public void updateComponent(){...}
+        
+        // 功能2，升级版本号
+        public void updateVersion(){...}
+        
+        // 获取版本号
+        public void getVersion(){...}
+    }
     
-    // 获取版本号
-    public void getVersion(){...}
-}
-
-/**
- * 分成两个类，一个是只更新版本号，另外一个只更新组件 
- */
-public class VersionClass {
-
-    // 功能1，升级版本号
-    public void updateVersion(){...}
+    /**
+     * 分成两个类，一个是只更新版本号，另外一个只更新组件 
+     */
+    public class VersionClass {
     
-    // 获取版本号
-    public void getVersion(){...}
-}
-
-public class ComponentClass {
-
-    // 功能1，升级组件
-    public void updateComponent(){...}
-}
-```
+        // 功能1，升级版本号
+        public void updateVersion(){...}
+        
+        // 获取版本号
+        public void getVersion(){...}
+    }
+    
+    public class ComponentClass {
+    
+        // 功能1，升级组件
+        public void updateComponent(){...}
+    }
+    ```
 - 类应该保持最大的内聚，关于内聚的定义：
 ```
 类中的每个方法都应该操作一个或者多个变量，通常，方法操作的变量越多，越会内聚到类上，如果一个类中的每个变量都
@@ -106,4 +106,41 @@ public class ComponentClass {
 5. 第4条准则是重要性比较低的准则，更加重要的是易于测试，消除重复，有意义的表达
 
 ### 第13章 并发
-
+- 单一职责，方法/类/组件应当值拥有一个修改的理由，并发代码应该拥有自己ide开发，修改的生命周期
+- 限制数据的作用域
+- 复制数据副本
+- 每个线程尽可能的独立
+- 生产者消费者模型，读者-写者模型，哲学家模型
+- 避免使用共享对象的多个方法
+    ```
+    共享对象(服务端对象)ShareDataClass，客户端对象ClientClass，ShareDataClass中有多个方法
+    当客户端对象ClientClass多线程调用共享对象ShareDataClass的多个方法时，有以下几种手段保证
+    1. 基于客户端对象锁定客户端对象ClientClass：客户端代码在调用第一个方法前锁定代码，确保锁的
+    范围覆盖了共享对象的最后一个方法，例如，自己使用synchronized
+    2. 基于服务器端的锁定：在服务端内创建锁定服务端的方法，调用所有方法，然后解锁，例如
+    使用StringBuffer，每个方法都是synchronized
+    3. 适配服务端：创建执行锁定的中间层，这是一种基于服务端锁定的例子，但是不修改原始服务器端代码
+    可使服务器端代码并发安全
+    ```
+- 尽量减少同步区域的大小
+- 写试错代码，增加Object.waite()，Object.sleep()，Object.yield()，Object.priority()
+  的调用，这些方法会影响执行顺序，从而更加可能的测试出并发代码的错误
+  ```
+  1. 硬编码，在下面的例子中，Thread.yield()方法是线程停止，这样使得程序发生了暂停，改变了cpu的执行的顺序
+     public synchronized String functionName() {
+       xxx
+       Thread.yield();
+       xxxx 
+     }
+  2. 自动化，新建一个类，在这个类中随机填充sleep，yield等方法，改变线程执行顺序， 在生产环境中是空的
+     或者，使用其他工具无侵入的填充代码进去
+    public class ThreadJigglePoint{
+       public static void jiggle() {
+       }
+    }
+    public synchronized String functionName() {
+       xxx
+       ThreadJigglePoint.jiggle();
+       xxxx 
+    }
+  ```
