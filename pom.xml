@@ -11,6 +11,7 @@
     <modules>
         <module>clean_code</module>
         <module>lambda</module>
+        <module>code_segment</module>
     </modules>
 
     <dependencies>
