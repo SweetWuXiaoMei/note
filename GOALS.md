@@ -49,7 +49,7 @@
 9. 分布式事物（2PC,3PC,CAP,BASE,可靠消息最终一致性，最大努力通知，TCC）
 10. 微服务（康威定律），ServiceMesh,Docker,Spring boot,Spring Cloud
 11. 数据库核心实现原理，分库分表，熟悉binlog格式，业务数据建模
-12. CND原理和设计，DNS原理和设计
+12. CDN原理和设计，DNS原理和设计
 13. 熟悉HTTP2，SPDY，HTTPS，QUIC协议
 14. 熟悉设计原则并用于实际开发中
 14. 书籍《代码整洁之道》，TOGAF（The Open Group Architecture Framework），《分布式服务架构：原理、设计与实战》，
