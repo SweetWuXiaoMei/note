@@ -27,11 +27,11 @@
         loadSidebar: true,
         subMaxLevel: 3,
         // 在页面右上角渲染一个 GitHub Corner 挂件
-        repo: 'czd1106403012.github.io/note',
+        repo: 'hello-world-example/MySQL',
         plugins: [
             function (hook, vm) {
                 hook.beforeEach(function (html) {
-                    var url = 'https://czd1106403012.github.io/note/docs/' + vm.route.file
+                    var url = 'https://github.com/hello-world-example/MySQL/edit/master/docs/' + vm.route.file
                     var editHtml = '<a class="" href="' + url + '" style="float: right;text-decoration: none">✍️编辑</a>';
 
                     return editHtml + "\n\n" + html
