@@ -1,5 +1,3 @@
-
-
 * 安装
   * [MAC 多实例安装 和 主从配置](install/mac-multiple-instance.md)
 * [GTID](GTID.md)
