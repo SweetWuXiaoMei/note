@@ -5,6 +5,7 @@
 * jdk源码解析
   * [ConcurrentHashMap](jdk源码解析/ConcurrentHashMap.md)
 * 网络
-  * [socket](网络/socket/socket是什么，处于网络中的哪一层，常用接口及流程有哪些.md)
+  * socket
+    * [socket的位置、api、调用流程](网络/socket/socket的位置、api、调用流程.md)
 * 设计模式
   * [破坏单例的方式](设计模式/破坏单例的方式.md)
