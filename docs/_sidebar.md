@@ -10,4 +10,4 @@
 * 设计模式
   * [破坏单例的方式](设计模式/破坏单例的方式.md)
 * netty
-  * [netty](netty/AbstractReferenceCountedByteBuf的属性与功能.md)
+  * [AbstractReferenceCountedByteBuf的属性与功能](netty/AbstractReferenceCountedByteBuf的属性与功能.md)
