@@ -9,3 +9,5 @@
     * [socket的位置、api、调用流程](网络/socket/socket的位置、api、调用流程.md)
 * 设计模式
   * [破坏单例的方式](设计模式/破坏单例的方式.md)
+* netty
+  * [netty](netty/AbstractReferenceCountedByteBuf的属性与功能.md)
