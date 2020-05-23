@@ -1,4 +1,4 @@
-# ByteBufHolder,ByteBufAllocator,CompositeByteBuf,ByteBufUtil的功能
+# ByteBufHolder、ByteBufAllocator、CompositeByteBuf、ByteBufUtil的功能
 
 - ByteBufHolder是ByteBuf的容器，例如http中请求和应答消息都有消息体，这些消息体在netty中是ByteBuf对象。不同的协议有不同的协议字段，需要对ByteBuf进行封装，可继承ByteBufHolder按需分配自己的实现
 - ByteBufAllocator是字节缓冲区分配器，有基于内存池的字节缓冲区分配器和普通的字节缓冲区分配器
