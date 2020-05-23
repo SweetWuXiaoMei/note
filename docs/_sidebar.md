@@ -11,3 +11,4 @@
   * [破坏单例的方式](设计模式/破坏单例的方式.md)
 * netty
   * [AbstractReferenceCountedByteBuf的属性与功能](netty/AbstractReferenceCountedByteBuf的属性与功能.md)
+  * [PooledByteBuf的原理](netty/PooledByteBuf的原理.md)
